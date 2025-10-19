@@ -44,11 +44,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.gayeyilmaz.todosapp.R
 import com.gayeyilmaz.todosapp.data.entity.ToDos
 import com.gayeyilmaz.todosapp.ui.components.CustomTopAppBar
+import com.gayeyilmaz.todosapp.ui.components.ToDoItem
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
 
@@ -111,7 +113,7 @@ fun MainScreen(navController: NavController){
 
 
                                 },
-                label={Text(text = "Search")},
+                label={Text(text = stringResource(R.string.search_hint_text))},
                 leadingIcon = { Icon(Icons.Filled.Search, contentDescription = "Seacrh Field", tint = colorResource(R.color.main_color))},
                 modifier = Modifier.fillMaxWidth(),
                 colors = OutlinedTextFieldDefaults.colors(
@@ -133,42 +135,29 @@ fun MainScreen(navController: NavController){
                 items(count=toDosList.value.size,
                     itemContent = {
                         val toDo = toDosList.value[it]
-                       Card(
-                           modifier = Modifier.padding(vertical=4.dp).clickable{
-                               val toDoJson = Gson().toJson(toDo)
-                               navController.navigate("updateScreen/$toDoJson")
-                           },
-                           colors= CardDefaults.cardColors(
-                               containerColor = colorResource(R.color.white)
-                           )
-                       ){
-                           Row(
-                               modifier = Modifier.fillMaxWidth(),
-                               verticalAlignment = Alignment.CenterVertically,
-                               horizontalArrangement = Arrangement.SpaceBetween
-                           ){
-                               Text(text = toDo.name, modifier = Modifier.padding(start=16.dp))
-                               IconButton(onClick = {
 
-                                   scope.launch {
-                                       val sb = snackbarHostState.showSnackbar(
-                                           message = "Delete ${toDo.name}?",
-                                           actionLabel = "YES"
-                                       )
-                                       if(sb == SnackbarResult.ActionPerformed){
-                                           delete(toDo.id)
-                                       }
-                                   }
+                        ToDoItem(
+                            toDo = toDo,
+                            onItemClick = {
+                                val toDoJson = Gson().toJson(toDo)
+                                navController.navigate("updateScreen/$toDoJson")
+                            },
+                            onDeleteClick = {
+                                scope.launch {
+                                    val sb = snackbarHostState.showSnackbar(
+                                        message =context.getString(R.string.snackbar_delete_message,toDo.name),
+                                        actionLabel = context.getString(R.string.snackbar_delete_action_text)
+                                    )
+                                    if(sb == SnackbarResult.ActionPerformed){
+                                        delete(it)
+                                    }
+                                }
+
+                            }
+                        )
 
 
 
-                               }) {
-                                   Icon(Icons.Filled.Close, contentDescription = "Delete Icon", tint = colorResource(R.color.dark_gray))
-                               }
-
-                           }
-
-                       }
                     }
                     )
             }

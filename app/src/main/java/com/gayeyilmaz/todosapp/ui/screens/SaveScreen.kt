@@ -24,6 +24,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import com.gayeyilmaz.todosapp.R
+import com.gayeyilmaz.todosapp.ui.components.CustomButton
+import com.gayeyilmaz.todosapp.ui.components.CustomTextField
 import com.gayeyilmaz.todosapp.ui.components.CustomTopAppBar
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -40,41 +42,27 @@ fun SaveScreen(){
 
     ) { paddingValues ->
         Column(
-            modifier = Modifier.fillMaxSize().padding(paddingValues).background(colorResource(R.color.background)).padding(16.dp),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+                .background(colorResource(R.color.background))
+                .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top
 
         ) {
-            OutlinedTextField(
-                value=toDoName.value,
-                onValueChange = {toDoName.value = it},
-                label={Text(text = "ToDo Name")},
-                modifier = Modifier.fillMaxWidth().padding(top=50.dp),
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedContainerColor = colorResource(R.color.white),
-                    unfocusedContainerColor = colorResource(R.color.white),
-                    disabledContainerColor  = colorResource(R.color.white),
-                    focusedLabelColor  = colorResource(R.color.main_color),
-                    cursorColor  = colorResource(R.color.main_color),
-                    focusedBorderColor = colorResource(R.color.main_color),
-                    unfocusedBorderColor = colorResource(R.color.white),
 
-                )
+
+            CustomTextField(
+                hint="ToDo Name",
+                value= toDoName.value ,
+                onValueChange = {toDoName.value = it}
             )
 
-            Button(
-                onClick = {save(toDoName.value)},
-                modifier = Modifier.fillMaxWidth(),
-                enabled = toDoName.value.isNotBlank(),
-                colors = ButtonDefaults.buttonColors(
-                    colorResource(R.color.main_color),
-                    contentColor = colorResource(R.color.white),
-                    disabledContainerColor = colorResource(R.color.dark_gray),
-                    disabledContentColor = colorResource(R.color.white),
-                )
-            ) {
-                Text(text="Save")
-            }
+            CustomButton(
+                buttonText="Save",
+                enable = toDoName.value.isNotBlank(),
+                onButtonClicked = {save(toDoName.value)})
 
 
 

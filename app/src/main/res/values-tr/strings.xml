@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ToDos </string>
+    <string name="search_hint_text">Ara </string>
+    <string name="snackbar_delete_action_text">EVET </string>
+    <string name="snackbar_delete_message">Sil %1$s ?</string>
+
+</resources>
