@@ -1,37 +1,34 @@
 package com.gayeyilmaz.todosapp.data.datasources
 
-import android.util.Log
+
 import com.gayeyilmaz.todosapp.data.entity.ToDos
+import com.gayeyilmaz.todosapp.room.ToDosDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class ToDosDatasource {
+class ToDosDatasource(var toDosDao: ToDosDao) {
     suspend fun save (name:String){
-        Log.e("ToDosDatasource","$name")
+        toDosDao.save(ToDos(0,name))
     }
 
     suspend fun update (id : Int,name:String){
-        Log.e("ToDosDatasource","$id - $name")
+       toDosDao.update(id,name)
     }
 
     suspend fun delete(id:Int){
-        Log.e("ToDosDatasource","Delete: $id")
+        toDosDao.delete(id)
     }
 
     suspend fun loadToDos():List<ToDos> = withContext(context = Dispatchers.IO){
-        return@withContext listOf(
-            ToDos(1,"work"),
-            ToDos(2,"study cse"),
-            ToDos(3,"study jetpack compose")
+        return@withContext toDosDao.loadToDao()
 
 
-        )
+
     }
 
     suspend fun search(searchText:String):List<ToDos> = withContext(context = Dispatchers.IO){
-        return@withContext listOf(
-            ToDos(1,"work"),
+        return@withContext toDosDao.search(searchText)
 
-        )
+
     }
 }

@@ -1,6 +1,6 @@
 package com.gayeyilmaz.todosapp.data.repos
 
-import android.util.Log
+
 import com.gayeyilmaz.todosapp.data.datasources.ToDosDatasource
 import com.gayeyilmaz.todosapp.data.entity.ToDos
 
