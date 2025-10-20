@@ -37,6 +37,8 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -60,26 +62,16 @@ import kotlinx.coroutines.launch
 fun MainScreen(navController: NavController,mainViewModel: MainViewModel){
     val searchQuery = remember { mutableStateOf("") }
 
-    fun search(searchText:String){
-        Log.e("MainScreen","Search: $searchText")
-    }
-    fun loadToDos():List<ToDos>{
-        return listOf(
-            ToDos(1,"work"),
-            ToDos(2,"study cse"),
-            ToDos(3,"study jetpack compose")
 
 
-        )
-    }
-    fun delete(id:Int){
-        Log.e("MainScreen","Delete: $id")
-    }
 
-    val toDosList = remember{mutableStateOf(loadToDos())}
+    val toDosList = mainViewModel.toDosList.observeAsState(listOf())
     val context = LocalContext.current
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
+    LaunchedEffect(true) {
+        mainViewModel.loadToDos()
+    }
 
     Scaffold(
 
@@ -110,7 +102,7 @@ fun MainScreen(navController: NavController,mainViewModel: MainViewModel){
             OutlinedTextField(
                 value=searchQuery.value,
                 onValueChange = {searchQuery.value = it
-                    search(it)
+                    mainViewModel.search(it)
 
 
                                 },
@@ -150,7 +142,7 @@ fun MainScreen(navController: NavController,mainViewModel: MainViewModel){
                                         actionLabel = context.getString(R.string.snackbar_delete_action_text)
                                     )
                                     if(sb == SnackbarResult.ActionPerformed){
-                                        delete(it)
+                                        mainViewModel.delete(it)
                                     }
                                 }
 

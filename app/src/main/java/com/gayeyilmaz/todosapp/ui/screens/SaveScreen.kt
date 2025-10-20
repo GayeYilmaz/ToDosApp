@@ -34,9 +34,7 @@ import com.gayeyilmaz.todosapp.ui.viewmodels.SaveViewModel
 fun SaveScreen(saveViewModel: SaveViewModel){
     val toDoName = remember { mutableStateOf("") }
 
-    fun save (name:String){
-        Log.e("SaveScreen","$name")
-    }
+
     Scaffold(
 
         topBar =  { CustomTopAppBar("Save Scren") },
@@ -63,7 +61,7 @@ fun SaveScreen(saveViewModel: SaveViewModel){
             CustomButton(
                 buttonText="Save",
                 enable = toDoName.value.isNotBlank(),
-                onButtonClicked = {save(toDoName.value)})
+                onButtonClicked = {saveViewModel.save(toDoName.value)})
 
 
 

@@ -35,9 +35,7 @@ fun UpdateScreen(toDo: ToDos,updateViewModel: UpdateViewModel){
 
     val toDoName = remember { mutableStateOf(toDo.name) }
 
-    fun update (id : Int,name:String){
-        Log.e("UpdateScreen","$id - $name")
-    }
+
 
     Scaffold(
         topBar =  { CustomTopAppBar("Update Screen")},
@@ -61,7 +59,7 @@ fun UpdateScreen(toDo: ToDos,updateViewModel: UpdateViewModel){
             CustomButton(
                 buttonText = "Update",
                 enable = toDoName.value.isNotBlank(),
-                onButtonClicked = {update(toDo.id,toDo.name)})
+                onButtonClicked = {updateViewModel.update(toDo.id,toDoName.value)})
 
 
 
