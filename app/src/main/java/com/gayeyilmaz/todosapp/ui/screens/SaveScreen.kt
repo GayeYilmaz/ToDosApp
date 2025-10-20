@@ -27,10 +27,11 @@ import com.gayeyilmaz.todosapp.R
 import com.gayeyilmaz.todosapp.ui.components.CustomButton
 import com.gayeyilmaz.todosapp.ui.components.CustomTextField
 import com.gayeyilmaz.todosapp.ui.components.CustomTopAppBar
+import com.gayeyilmaz.todosapp.ui.viewmodels.SaveViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SaveScreen(){
+fun SaveScreen(saveViewModel: SaveViewModel){
     val toDoName = remember { mutableStateOf("") }
 
     fun save (name:String){

@@ -27,10 +27,11 @@ import com.gayeyilmaz.todosapp.data.entity.ToDos
 import com.gayeyilmaz.todosapp.ui.components.CustomButton
 import com.gayeyilmaz.todosapp.ui.components.CustomTextField
 import com.gayeyilmaz.todosapp.ui.components.CustomTopAppBar
+import com.gayeyilmaz.todosapp.ui.viewmodels.UpdateViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun UpdateScreen(toDo: ToDos){
+fun UpdateScreen(toDo: ToDos,updateViewModel: UpdateViewModel){
 
     val toDoName = remember { mutableStateOf(toDo.name) }
 

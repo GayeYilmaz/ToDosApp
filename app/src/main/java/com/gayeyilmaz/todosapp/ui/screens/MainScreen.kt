@@ -51,12 +51,13 @@ import com.gayeyilmaz.todosapp.R
 import com.gayeyilmaz.todosapp.data.entity.ToDos
 import com.gayeyilmaz.todosapp.ui.components.CustomTopAppBar
 import com.gayeyilmaz.todosapp.ui.components.ToDoItem
+import com.gayeyilmaz.todosapp.ui.viewmodels.MainViewModel
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen(navController: NavController){
+fun MainScreen(navController: NavController,mainViewModel: MainViewModel){
     val searchQuery = remember { mutableStateOf("") }
 
     fun search(searchText:String){
