@@ -18,6 +18,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.gayeyilmaz.todosapp.R
 import com.gayeyilmaz.todosapp.data.entity.ToDos
@@ -35,7 +36,7 @@ fun UpdateScreen(toDo: ToDos,updateViewModel: UpdateViewModel){
 
 
     Scaffold(
-        topBar =  { CustomTopAppBar("Update Screen")},
+        topBar =  { CustomTopAppBar(stringResource(R.string.update_screen_nav_text))},
 
 
     ) { paddingValues ->
@@ -47,14 +48,14 @@ fun UpdateScreen(toDo: ToDos,updateViewModel: UpdateViewModel){
         ) {
 
             CustomTextField(
-                hint="ToDo Name",
+                hint=stringResource(R.string.textfield_hint_text),
                 value= toDoName.value ,
                 onValueChange = {toDoName.value = it}
             )
 
 
             CustomButton(
-                buttonText = "Update",
+                buttonText = stringResource(R.string.update_button_text),
                 enable = toDoName.value.isNotBlank(),
                 onButtonClicked = {updateViewModel.update(toDo.id,toDoName.value)})
 

@@ -19,6 +19,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.gayeyilmaz.todosapp.R
 import com.gayeyilmaz.todosapp.ui.components.CustomButton
@@ -34,7 +35,7 @@ fun SaveScreen(saveViewModel: SaveViewModel){
 
     Scaffold(
 
-        topBar =  { CustomTopAppBar("Save Scren") },
+        topBar =  { CustomTopAppBar(stringResource(R.string.save_screen_nav_text)) },
 
     ) { paddingValues ->
         Column(
@@ -50,13 +51,13 @@ fun SaveScreen(saveViewModel: SaveViewModel){
 
 
             CustomTextField(
-                hint="ToDo Name",
+                hint= stringResource(R.string.textfield_hint_text),
                 value= toDoName.value ,
                 onValueChange = {toDoName.value = it}
             )
 
             CustomButton(
-                buttonText="Save",
+                buttonText=stringResource(R.string.save_button_text),
                 enable = toDoName.value.isNotBlank(),
                 onButtonClicked = {saveViewModel.save(toDoName.value)})
 

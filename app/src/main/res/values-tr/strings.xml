@@ -4,4 +4,11 @@
     <string name="snackbar_delete_action_text">EVET </string>
     <string name="snackbar_delete_message">Sil %1$s ?</string>
 
+    <string name="textfield_hint_text">Görevi yaz</string>
+    <string name="save_button_text">Kaydet</string>
+    <string name="save_screen_nav_text">Kayıt Ekranı</string>
+
+    <string name="update_button_text">Güncelle</string>
+    <string name="update_screen_nav_text">Güncelleme Ekranı</string>
+
 </resources>

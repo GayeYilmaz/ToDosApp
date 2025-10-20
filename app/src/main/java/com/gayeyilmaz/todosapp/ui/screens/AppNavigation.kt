@@ -20,7 +20,7 @@ fun AppNavigation(
     saveViewModel: SaveViewModel,
     updateViewModel: UpdateViewModel
 ){
-    val navController = rememberNavController();
+    val navController = rememberNavController()
 
     NavHost(navController=navController,startDestination= "mainScreen"){
         composable("mainScreen"){
