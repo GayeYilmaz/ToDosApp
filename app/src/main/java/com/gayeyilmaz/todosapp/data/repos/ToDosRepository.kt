@@ -4,8 +4,8 @@ import android.util.Log
 import com.gayeyilmaz.todosapp.data.datasources.ToDosDatasource
 import com.gayeyilmaz.todosapp.data.entity.ToDos
 
-class ToDosRepository {
-    val toDosDatasource = ToDosDatasource()
+class ToDosRepository (var toDosDatasource: ToDosDatasource){
+
 
     suspend fun save (name:String){
         toDosDatasource.save(name)

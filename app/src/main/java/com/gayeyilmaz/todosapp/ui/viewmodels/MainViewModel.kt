@@ -4,12 +4,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.gayeyilmaz.todosapp.data.entity.ToDos
 import com.gayeyilmaz.todosapp.data.repos.ToDosRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainViewModel : ViewModel() {
-    var toDosRepository = ToDosRepository()
+@HiltViewModel
+class MainViewModel @Inject constructor(var toDosRepository:ToDosRepository) : ViewModel() {
+
 
     init{
         loadToDos()
